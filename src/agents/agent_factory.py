@@ -6,6 +6,7 @@ a unified AgentFactory class for easy agent instantiation.
 """
 from agent_framework import ChatAgent
 from agent_framework.azure import AzureOpenAIChatClient
+from agent_framework.openai import OpenAIChatOptions
 
 from agents import classifier_agent
 from agents import yes_no_agent
@@ -34,7 +35,7 @@ class AgentFactory:
         self.chat_client = chat_client
         self.search_service = search_service
     
-    def create_all_agents(self) -> dict[str, ChatAgent]:
+    def create_all_agents(self) -> dict[str, ChatAgent[OpenAIChatOptions]]:
         """
         Create all agents needed for the system.
         

@@ -53,7 +53,7 @@ async def main():
             name="agentic_rag_workflow",
             participants=[agents["classifier"], agents["yes_no"], agents["semantic_search"], agents["count"], agents["difference"], agents["intersection"], agents["multi_hop"], agents["comparative"], agents["ordinal"], agents["superlative"]],
         )
-        .set_coordinator(agents["classifier"])
+        .with_start_agent(agents["classifier"])
         .build()
     )
     print("✓ Workflow built successfully")
@@ -126,16 +126,7 @@ async def interactive_mode():
     search_service = SearchService(config, chat_client)
     agent_factory = AgentFactory(chat_client, search_service)
     agents = agent_factory.create_all_agents()
-    
-    workflow = (
-        HandoffBuilder(
-            name="agentic_rag_workflow",
-            participants=[agents["classifier"], agents["yes_no"]],
-        )
-        .set_coordinator(agents["classifier"])
-        .build()
-    )
-    
+        
     print("✓ System ready\n")
     
     # Interactive loop - each query starts fresh
@@ -156,7 +147,7 @@ async def interactive_mode():
                     name="agentic_rag_workflow",
                     participants=[agents["classifier"], agents["yes_no"], agents["semantic_search"], agents["count"], agents["difference"], agents["intersection"], agents["multi_hop"], agents["comparative"], agents["ordinal"], agents["superlative"]],
                 )
-                .set_coordinator(agents["classifier"])
+                .with_start_agent(agents["classifier"])
                 .build()
             )
             

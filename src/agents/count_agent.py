@@ -5,6 +5,7 @@ import json
 from typing import Annotated
 from agent_framework import ChatAgent, ai_function
 from agent_framework.azure import AzureOpenAIChatClient
+from agent_framework.openai import OpenAIChatOptions
 
 from services import SearchService
 
@@ -155,7 +156,7 @@ Base your count strictly on tickets that match ALL criteria in the question.
 def create_count_agent(
     chat_client: AzureOpenAIChatClient,
     search_service: SearchService
-) -> ChatAgent:
+) -> ChatAgent[OpenAIChatOptions]:
     """
     Create the count specialist agent.
     

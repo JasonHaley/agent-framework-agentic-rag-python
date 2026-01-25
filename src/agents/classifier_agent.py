@@ -1,8 +1,9 @@
 """
 Classifier agent for routing queries to specialized search agents.
 """
-from agent_framework import ChatAgent
+from agent_framework import ChatAgent 
 from agent_framework.azure import AzureOpenAIChatClient
+from agent_framework.openai import OpenAIChatOptions
 
 
 CLASSIFIER_AGENT_INSTRUCTIONS = """
@@ -140,7 +141,7 @@ The database contains IT support tickets with these fields:
 """
 
 
-def create_classifier_agent(chat_client: AzureOpenAIChatClient) -> ChatAgent:
+def create_classifier_agent(chat_client: AzureOpenAIChatClient) -> ChatAgent[OpenAIChatOptions]:
     """
     Create the classifier agent that routes queries to specialists.
     
