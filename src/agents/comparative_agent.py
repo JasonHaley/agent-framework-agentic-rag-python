@@ -210,7 +210,7 @@ def create_comparative_agent(
     # Create the AI function with the search service
     comparative_search_fn = create_comparative_search_function(search_service)
     
-    return chat_client.create_agent(
+    return chat_client.as_agent(
         instructions=COMPARATIVE_AGENT_INSTRUCTIONS,
         name="comparative_agent",
         tools=[comparative_search_fn],

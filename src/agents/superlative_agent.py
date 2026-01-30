@@ -272,7 +272,7 @@ def create_superlative_agent(
     # Create the AI function with the search service
     superlative_search_fn = create_superlative_search_function(search_service)
     
-    return chat_client.create_agent(
+    return chat_client.as_agent(
         instructions=SUPERLATIVE_AGENT_INSTRUCTIONS,
         name="superlative_agent",
         tools=[superlative_search_fn],

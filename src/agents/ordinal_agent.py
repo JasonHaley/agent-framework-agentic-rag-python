@@ -247,7 +247,7 @@ def create_ordinal_agent(
     # Create the AI function with the search service
     ordinal_search_fn = create_ordinal_search_function(search_service)
     
-    return chat_client.create_agent(
+    return chat_client.as_agent(
         instructions=ORDINAL_AGENT_INSTRUCTIONS,
         name="ordinal_agent",
         tools=[ordinal_search_fn],

@@ -177,7 +177,7 @@ def create_multi_hop_agent(
     # Create the AI function with the search service
     multi_hop_search_fn = create_multi_hop_search_function(search_service)
     
-    return chat_client.create_agent(
+    return chat_client.as_agent(
         instructions=MULTI_HOP_AGENT_INSTRUCTIONS,
         name="multi_hop_agent",
         tools=[multi_hop_search_fn],

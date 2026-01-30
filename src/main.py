@@ -4,6 +4,8 @@ Agentic RAG application for IT support ticket search.
 This application uses the Microsoft Agent Framework with a Handoff orchestration
 pattern to route user questions to specialized search agents based on query type.
 """
+import sys
+import os
 import asyncio
 from agent_framework import HandoffBuilder
 from agent_framework.azure import AzureOpenAIChatClient
@@ -16,6 +18,11 @@ from workflows import drain_events, handle_workflow_events
 async def main():
     """Main execution function for the Agentic RAG system."""
     
+
+    print("Python executable:", sys.executable)
+    print("Python path:", sys.path)
+    print("Current directory:", os.getcwd())
+
     print("=" * 60)
     print("AGENTIC RAG - IT SUPPORT TICKET SEARCH")
     print("=" * 60)

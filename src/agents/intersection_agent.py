@@ -200,7 +200,7 @@ def create_intersection_agent(
     # Create the AI function with the search service
     intersection_search_fn = create_intersection_search_function(search_service)
     
-    return chat_client.create_agent(
+    return chat_client.as_agent(
         instructions=INTERSECTION_AGENT_INSTRUCTIONS,
         name="intersection_agent",
         tools=[intersection_search_fn],
