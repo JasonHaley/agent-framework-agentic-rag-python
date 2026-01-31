@@ -11,9 +11,6 @@
     "location": {
       "value": "${AZURE_LOCATION}"
     },
-    "principalId": {
-      "value": "${AZURE_PRINCIPAL_ID}"
-    },
     "openAiServiceName": {
       "value": "${AZURE_OPENAI_SERVICE}"
     },
@@ -27,7 +24,7 @@
       "value": "S0"
     },    
     "searchIndexName": {
-      "value": "${AZURE_SEARCH_INDEX=gptkbindex}"
+      "value": "${AZURE_SEARCH_INDEX_NAME=support-tickets-index}"
     },
     "searchServiceName": {
       "value": "${AZURE_SEARCH_SERVICE}"
@@ -53,23 +50,20 @@
     "searchServiceQueryRewriting": {
       "value": "${AZURE_SEARCH_QUERY_REWRITING=false}"
     },
-    "searchFieldNameEmbedding": {
-      "value": "${AZURE_SEARCH_FIELD_NAME_EMBEDDING=embedding3}"
+    "searchFieldNameEmbedding1": {
+      "value": "${AZURE_SEARCH_FIELD_NAME_EMBEDDING=BodyEmbeddings}"
+    },
+    "searchFieldNameEmbedding2": {
+      "value": "${AZURE_SEARCH_FIELD_NAME_EMBEDDING=AnswerEmbeddings}"
     },
     "defaultReasoningEffort": {
       "value": "${AZURE_OPENAI_REASONING_EFFORT=medium}"
-    },
-    "defaultRetrievalReasoningEffort": {
-      "value": "${AZURE_SEARCH_KNOWLEDGEBASE_RETRIEVAL_REASONING_EFFORT=low}"
-    },
-    "backendServiceName": {
-      "value": "${AZURE_APP_SERVICE}"
     },
     "chatGptModelName": {
       "value": "${AZURE_OPENAI_CHATGPT_MODEL}"
     },
     "chatGptDeploymentName": {
-      "value": "${AZURE_OPENAI_CHATGPT_DEPLOYMENT}"
+      "value": "${AZURE_OPENAI_CHAT_DEPLOYMENT_NAME}"
     },
     "chatGptDeploymentVersion": {
       "value": "${AZURE_OPENAI_CHATGPT_DEPLOYMENT_VERSION}"
@@ -81,16 +75,16 @@
       "value": "${AZURE_OPENAI_CHATGPT_DEPLOYMENT_CAPACITY}"
     },
     "embeddingModelName": {
-      "value": "${AZURE_OPENAI_EMB_MODEL_NAME}"
+      "value": "${AZURE_OPENAI_EMB_MODEL_NAME=text-embedding-ada-002}"
     },
     "embeddingDeploymentName": {
-      "value": "${AZURE_OPENAI_EMB_DEPLOYMENT}"
+      "value": "${AZURE_OPENAI_EMBEDDING_DEPLOYMENT_NAME=text-embedding-ada-002}"
     },
     "embeddingDeploymentVersion": {
-      "value": "${AZURE_OPENAI_EMB_DEPLOYMENT_VERSION}"
+      "value": "${AZURE_OPENAI_EMB_DEPLOYMENT_VERSION=2}"
     },
     "embeddingDeploymentSkuName": {
-      "value": "${AZURE_OPENAI_EMB_DEPLOYMENT_SKU}"
+      "value": "${AZURE_OPENAI_EMB_DEPLOYMENT_SKU=Standard}"
     },
     "embeddingDeploymentCapacity": {
       "value": "${AZURE_OPENAI_EMB_DEPLOYMENT_CAPACITY}"

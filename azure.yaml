@@ -5,11 +5,23 @@ metadata:
     template: azd-init@1.23.2
 services:
     app:
-        project: app
+        project: src
         language: python
         host: containerapp
         docker:
             remoteBuild: true
+hooks:
+    postprovision:
+        windows:
+            shell: pwsh
+            run:  ./scripts/load_index.ps1
+            interactive: false
+            continueOnError: false
+        posix:
+            shell: sh
+            run:  ./scripts/load_index.sh
+            interactive: false
+            continueOnError: false
 resources:
     app:
         type: host.containerapp
