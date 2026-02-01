@@ -239,6 +239,18 @@ Key dependencies include:
 
 ## Usage
 
+First make sure you have activated the venv before running.
+
+#### Windows (PowerShell)
+```bash
+.venv\Scripts\Activate.ps1
+```
+
+#### Mac, Linux
+```bash
+source .venv/bin/activate
+```
+
 ### Demo Mode (Default)
 Runs predefined test queries to demonstrate the system:
 
