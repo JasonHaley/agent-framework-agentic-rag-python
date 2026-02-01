@@ -1,6 +1,10 @@
 # Agentic RAG - IT Support Ticket Search
 
-This directory contains the source code for an **Agentic RAG (Retrieval-Augmented Generation) system** that intelligently routes user queries to specialized AI agents for searching and analyzing IT support tickets.
+This is an **example of implementing an Agentic RAG (Retrieval-Augmented Generation) system*** in python and using [agent-framework](https://github.com/microsoft/agent-framework).
+
+The sample uses a Kaggle dataset from Tobias Bueck. (2025). [Customer IT Support - Ticket Dataset](https://www.kaggle.com/datasets/tobiasbueck/multilingual-customer-support-tickets). I have filtered out the non-english tickets and added a random create date in order to perform additional search types.
+
+> NOTE: This is based on the lab3 solution I created for [agent-framework-dev-day](https://github.com/AgentFrameworkDev/agent-framework-dev-day)
 
 ## Overview
 
