@@ -4,6 +4,7 @@ Configuration module for Azure AI Search and OpenAI settings.
 import os
 from dataclasses import dataclass
 from azure.identity import DefaultAzureCredential
+from azure.core.credentials import AzureKeyCredential
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -17,13 +18,14 @@ class AzureConfig:
     search_index_name: str
     
     # Azure OpenAI
-    openai_endpoiint: str
+    openai_endpoint: str
     openai_api_version: str
+    openai_api_key: str
     chat_model: str
     embedding_model: str
     
     # Credentials
-    credential: DefaultAzureCredential
+    search_credential: AzureKeyCredential
     
     @classmethod
     def from_env(cls) -> "AzureConfig":
@@ -32,11 +34,12 @@ class AzureConfig:
             search_endpoint=os.getenv("AZURE_SEARCH_ENDPOINT", ""),
             search_api_key=os.getenv("AZURE_SEARCH_API_KEY", ""),
             search_index_name=os.getenv("AZURE_SEARCH_INDEX_NAME", ""),
-            openai_endpoiint=os.getenv("AZURE_OPENAI_ENDPOINT", ""),
+            openai_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT", ""),
             openai_api_version=os.getenv("AZURE_OPENAI_API_VERSION", ""),
+            openai_api_key=os.getenv("AZURE_OPENAI_API_KEY", ""),
             chat_model=os.getenv("AZURE_OPENAI_CHAT_DEPLOYMENT_NAME", ""),
             embedding_model=os.getenv("AZURE_OPENAI_EMBEDDING_DEPLOYMENT_NAME", ""),
-            credential=DefaultAzureCredential()
+            search_credential=AzureKeyCredential(os.getenv("AZURE_SEARCH_API_KEY", ""))
         )
     
     def validate(self) -> None:
@@ -51,5 +54,5 @@ class AzureConfig:
             raise ValueError("AZURE_OPENAI_EMBEDDING_DEPLOYMENT_NAME environment variable is required")
         if not self.chat_model:
             raise ValueError("AZURE_OPENAI_CHAT_DEPLOYMENT_NAME environment variable is required")
-        if not self.openai_endpoiint:
+        if not self.openai_endpoint:
             raise ValueError("AZURE_OPENAI_ENDPOINT environment variable is required")

@@ -39,7 +39,7 @@ async def main():
     
     # Initialize Azure OpenAI chat client
     print("\n[2/5] Initializing Azure OpenAI client...")
-    chat_client = AzureOpenAIChatClient(credential=config.credential)
+    chat_client = AzureOpenAIChatClient()
     print("✓ Chat client initialized")
     
     # Initialize search service

@@ -71,7 +71,6 @@ param location string
 param resourceGroupName string = '' // Set in main.parameters.json
 
 param searchServiceName string = '' // Set in main.parameters.json
-param searchServiceResourceGroupName string = '' // Set in main.parameters.json
 param searchServiceLocation string = '' // Set in main.parameters.json
 // The free tier does not support managed identity (required) or semantic search (optional)
 @allowed(['free', 'basic', 'standard', 'standard2', 'standard3', 'storage_optimized_l1', 'storage_optimized_l2'])
@@ -95,7 +94,6 @@ param azureOpenAiCustomUrl string = ''
 @secure()
 param azureOpenAiApiKey string = ''
 param openAiServiceName string = ''
-param openAiResourceGroupName string = ''
 
 // https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#models-by-deployment-type
 @description('Location for the OpenAI resource group')
@@ -177,14 +175,6 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-11-01' = {
   tags: tags
 }
 
-resource openAiResourceGroup 'Microsoft.Resources/resourceGroups@2024-11-01' existing = if (!empty(openAiResourceGroupName)) {
-  name: !empty(openAiResourceGroupName) ? openAiResourceGroupName : resourceGroup.name
-}
-
-resource searchServiceResourceGroup 'Microsoft.Resources/resourceGroups@2024-11-01' existing = if (!empty(searchServiceResourceGroupName)) {
-  name: !empty(searchServiceResourceGroupName) ? searchServiceResourceGroupName : resourceGroup.name
-}
-
 var appEnvVariables = {
   AZURE_SUBSCRIPTION_ID: subscription().subscriptionId
    AZURE_TENANT_ID: tenantId
@@ -237,7 +227,7 @@ var defaultOpenAiDeployments = [
 
 module openAi 'br/public:avm/res/cognitive-services/account:0.14.1' = if (isAzureOpenAiHost && deployAzureOpenAi) {
   name: 'openai'
-  scope: openAiResourceGroup
+  scope: resourceGroup
   params: {
     name: !empty(openAiServiceName) ? openAiServiceName : '${abbrs.cognitiveServicesAccounts}${resourceToken}'
     location: openAiLocation
@@ -255,7 +245,7 @@ module openAi 'br/public:avm/res/cognitive-services/account:0.14.1' = if (isAzur
 
 module searchService 'core/search/search-services.bicep' = {
   name: 'search-service'
-  scope: searchServiceResourceGroup
+  scope: resourceGroup
   params: {
     name: !empty(searchServiceName) ? searchServiceName : 'afarag-${resourceToken}'
     location: !empty(searchServiceLocation) ? searchServiceLocation : location
@@ -289,7 +279,7 @@ output AZURE_OPENAI_EMBEDDING_DEPLOYMENT_NAME string = isAzureOpenAiHost ? embed
 output AZURE_SEARCH_INDEX_NAME string = searchIndexName
 output AZURE_SEARCH_ENDPOINT string = 'https://${searchService.outputs.name}.search.windows.net'
 output AZURE_SEARCH_API_KEY string = searchService.outputs.primaryAdminKey
-output AZURE_SEARCH_SERVICE_RESOURCE_GROUP string = searchServiceResourceGroup.name
+output AZURE_SEARCH_SERVICE_RESOURCE_GROUP string = resourceGroup.name
 output AZURE_SEARCH_SEMANTIC_RANKER string = actualSearchServiceSemanticRankerLevel
 output AZURE_SEARCH_FIELD_NAME_EMBEDDING1 string = searchFieldNameEmbedding1
 output AZURE_SEARCH_FIELD_NAME_EMBEDDING2 string = searchFieldNameEmbedding2

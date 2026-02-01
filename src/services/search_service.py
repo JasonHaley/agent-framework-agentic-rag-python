@@ -26,21 +26,17 @@ class SearchService:
         """
         self.config = config
         self.chat_client = chat_client
-
-        # Create a token provider that returns a fresh bearer token on each call
-        token_provider = get_bearer_token_provider(
-            config.credential,
-            "https://cognitiveservices.azure.com/.default",
-        )
-
+        
         self.openai_client = AzureOpenAI(
-            azure_ad_token_provider=token_provider,
+            azure_endpoint=config.openai_endpoint,
+            api_key=config.openai_api_key,
             api_version=config.openai_api_version
         )
+
         self.search_client = SearchClient(
             endpoint=config.search_endpoint,
             index_name=config.search_index_name,
-            credential=AzureKeyCredential(config.search_api_key),
+            credential=config.search_credential,
         )
     
     def get_embedding(self, text: str) -> list[float]:

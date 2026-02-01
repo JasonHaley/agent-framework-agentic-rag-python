@@ -14,9 +14,6 @@
     "openAiServiceName": {
       "value": "${AZURE_OPENAI_SERVICE}"
     },
-    "openAiResourceGroupName": {
-      "value": "${AZURE_OPENAI_RESOURCE_GROUP}"
-    },
     "openAiLocation": {
       "value": "${AZURE_OPENAI_LOCATION}"
     },
@@ -28,9 +25,6 @@
     },
     "searchServiceName": {
       "value": "${AZURE_SEARCH_SERVICE}"
-    },
-    "searchServiceResourceGroupName": {
-      "value": "${AZURE_SEARCH_SERVICE_RESOURCE_GROUP}"
     },
     "searchServiceLocation": {
       "value": "${AZURE_SEARCH_SERVICE_LOCATION}"

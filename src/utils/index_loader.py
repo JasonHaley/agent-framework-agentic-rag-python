@@ -38,6 +38,7 @@ AZURE_SEARCH_INDEX_NAME = os.getenv("AZURE_SEARCH_INDEX_NAME", "support-tickets-
 AZURE_SEARCH_API_KEY = os.getenv("AZURE_SEARCH_API_KEY")
 
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
+AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
 AZURE_OPENAI_API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION", "2024-02-01")
 AZURE_OPENAI_EMBEDDING_DEPLOYMENT_NAME = os.getenv("AZURE_OPENAI_EMBEDDING_DEPLOYMENT_NAME", "text-embedding-ada-002")
 
@@ -51,18 +52,9 @@ BATCH_SIZE = 100
 def get_openai_client() -> AzureOpenAI:
     """Create and return an Azure OpenAI client."""
 
-    # Create a token provider that returns a fresh bearer token on each call
-    # token_provider = get_bearer_token_provider(
-    #     DefaultAzureCredential(),
-    #     "https://cognitiveservices.azure.com/.default",
-    # )
-    # return AzureOpenAI(
-    #     azure_ad_token_provider=token_provider,
-    #     api_version=AZURE_OPENAI_API_VERSION
-    # )
     return AzureOpenAI(
+        azure_endpoint=AZURE_OPENAI_ENDPOINT,
         api_key=AZURE_OPENAI_API_KEY,
-        endpoint=AZURE_OPENAI_ENDPOINT,
         api_version=AZURE_OPENAI_API_VERSION
     )
 
@@ -356,9 +348,7 @@ def main(csv_file_path: str):
         
     # Initialize clients
     print("\nInitializing clients...")
-    print(AZURE_SEARCH_ENDPOINT)
-    print(AZURE_SEARCH_INDEX_NAME)
-
+    
     search_credential = AzureKeyCredential(AZURE_SEARCH_API_KEY)
     index_client = SearchIndexClient(
         endpoint=AZURE_SEARCH_ENDPOINT,
